@@ -12,7 +12,6 @@ avg_change = 0.0
 
 with open(financial_data) as csvfile:
     csvreader = csv.reader(csvfile, delimiter=",")
-    
     csv_header = next(csvreader)
 #takes each month and profit/loss and append to respective lists
     for row in csvreader:
@@ -26,24 +25,22 @@ net_total = sum(profit_loss)
 #calculates average of monthly changes
 avg_change_month = []
 
-for x in range(1, len(profit_loss)):
-    avg_change_month.append(profit_loss[x] - profit_loss[x - 1])
-
-avg_change = round(sum(avg_change_month) / len(avg_change_month), 2)
-
 #finds greatest increase and decrease
 greatest_inc = 0
 greatest_dec = 0 
 
-for x in range(len(profit_loss)):
-    if profit_loss[x] > greatest_inc:
-        greatest_inc = profit_loss[x]
+for x in range(1, len(profit_loss)):
+    profit_change = profit_loss[x] - profit_loss[x - 1]
+    avg_change_month.append(profit_change)
+    if profit_change > greatest_inc:
+        greatest_inc = profit_change
         greatest_inc_month = months[x]
-
-    if profit_loss[x] < greatest_dec:
-        greatest_dec = profit_loss[x]
+    elif profit_change < greatest_dec:
+        greatest_dec = profit_change
         greatest_dec_month = months[x]
 
+avg_change = round(sum(avg_change_month) / len(avg_change_month), 2)
+   
 print("Financial Analysis")
 print("----------------------------")
 print(f'Total Months: {total_months}')
@@ -65,55 +62,3 @@ with open(output_file, "w") as textfile:
     textfile.write(f'Greatest Increase in Profits: {greatest_inc_month} (${greatest_inc})\n')
     textfile.write(f'Greatest Decrease in Profits: {greatest_dec_month} (${greatest_dec})\n')
     textfile.write("----------------------------")
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-'''
-o = open("financial_analysis.txt", "a")
-
-with open(output_file, "a") as f:
-    print("Financial Analysis", file=f)
-    print("----------------------------", file=f)
-    print(f'Total Months: {total_months}', file=f)
-    print(f'Total: ${net_total}', file=f)
-    print(f'Average Change: ${avg_change}', file=f)
-    print(f'Greatest Increase in Profits: {greatest_inc_month} (${greatest_inc})', file=f)
-    print(f'Greatest Decrease in Profits: {greatest_dec_month} (${greatest_dec})', file=f)
-    print("----------------------------", file=f)
-'''
