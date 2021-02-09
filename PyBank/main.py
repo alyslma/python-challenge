@@ -40,7 +40,7 @@ for x in range(1, len(profit_loss)):
         greatest_dec_month = months[x]
 
 avg_change = round(sum(avg_change_month) / len(avg_change_month), 2)
-   
+
 print("Financial Analysis")
 print("----------------------------")
 print(f'Total Months: {total_months}')

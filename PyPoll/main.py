@@ -12,7 +12,7 @@ with open(election_data) as csvfile:
     
     csv_header = next(csvreader)
 
-#creates a dictionary counting votes for each candidate. idea for for loop taken from Udacity Intro to Python course
+#creates a dictionary counting votes for each candidate
     for row in csvreader:
         counter[row[2]] = counter.get(row[2], 0) + 1
 
